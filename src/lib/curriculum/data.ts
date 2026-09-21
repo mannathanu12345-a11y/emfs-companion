@@ -38,19 +38,19 @@ export const batches: Batch[] = [
   {
     id: "batch-4",
     name: "Batch 4",
-    startDate: "2026-06-01",
+    startDate: "2026-09-15",
     readingDaysPerWeek: [1, 2, 3, 4, 5],
     offsets: [
-      { id: "off-eid", label: "Eid break +3d", startDate: "2026-07-13", days: 3 },
-      { id: "off-exams", label: "Exam week +5d", startDate: "2026-10-05", days: 5 },
+      { id: "off-eid", label: "Eid break +3d", startDate: "2026-10-05", days: 3 },
+      { id: "off-exams", label: "Exam week +5d", startDate: "2026-11-16", days: 5 },
     ],
   },
   {
     id: "batch-5",
     name: "Batch 5",
-    startDate: "2026-08-17",
+    startDate: "2026-09-06",
     readingDaysPerWeek: [0, 2, 4, 6],
-    offsets: [{ id: "off-travel", label: "Travel pause +2d", startDate: "2026-09-28", days: 2 }],
+    offsets: [{ id: "off-travel", label: "Travel pause +2d", startDate: "2026-10-11", days: 2 }],
   },
 ];
 
