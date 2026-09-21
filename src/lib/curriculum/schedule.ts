@@ -91,7 +91,6 @@ export function groupTimeline(
     } else {
       status = "notStarted";
     }
-    if (status === "current") firstUnstartedSeen = true;
 
     const result: BookProgress = {
       book,
