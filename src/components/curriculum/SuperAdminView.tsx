@@ -17,7 +17,9 @@ export function SuperAdminView() {
     const next = [...catalog];
     const target = index + delta;
     if (target < 0 || target >= next.length) return;
-    [next[index], next[target]] = [next[target], next[index]];
+    const a = next[index]!;
+    next[index] = next[target]!;
+    next[target] = a;
     setCatalog(renumber(next));
   };
 
@@ -86,10 +88,10 @@ export function SuperAdminView() {
           {[1, 2, 3, 4].map((day) => (
             <div key={day} className="rounded-lg border border-border bg-surface-2 p-3">
               <p className="text-xs font-mono text-muted-foreground">
-                {catalog[0].title} · day {day}
+                {catalog[0]!.title} · day {day}
               </p>
               <p className="text-sm font-medium text-foreground">
-                {masterTask(catalog[0].id, day).topic}
+                {masterTask(catalog[0]!.id, day).topic}
               </p>
             </div>
           ))}

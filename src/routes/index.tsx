@@ -39,7 +39,7 @@ export const Route = createFileRoute("/")({
 });
 
 function CurriculumPage() {
-  const [batchId, setBatchId] = useState(batches[0].id);
+  const [batchId, setBatchId] = useState(batches[0]!.id);
   const [todayIso, setTodayIso] = useState(DEFAULT_SIMULATED_TODAY);
   const [tab, setTab] = useState("super");
 

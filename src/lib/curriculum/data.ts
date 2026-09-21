@@ -133,8 +133,8 @@ const topicsBySlot: Record<number, string[]> = {
 
 export function masterTask(bookId: string, day: number): MasterTask {
   const book = books.find((b) => b.id === bookId)!;
-  const list = topicsBySlot[book.slot] ?? topicsBySlot[1];
-  return { bookId, day, topic: list[(day - 1) % list.length] };
+  const list = topicsBySlot[book.slot] ?? topicsBySlot[1]!;
+  return { bookId, day, topic: list[(day - 1) % list.length]! };
 }
 
 export const DEFAULT_SIMULATED_TODAY = "2026-09-21";

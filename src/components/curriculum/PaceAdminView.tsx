@@ -46,7 +46,7 @@ export function PaceAdminView({ batch, today }: { batch: Batch; today: Date }) {
   const { group, assignment } = activeEntry;
   const rows = groupTimeline(batch, group.size, books, today);
   const currentIdx = rows.findIndex((r) => r.status === "current");
-  const current = currentIdx >= 0 ? rows[currentIdx] : rows[rows.length - 1];
+  const current = (currentIdx >= 0 ? rows[currentIdx] : rows[rows.length - 1])!;
   const next = rows[(currentIdx >= 0 ? currentIdx : rows.length - 1) + 1];
   const completedToday = rows.find((r) => r.status === "done" && isSameDay(r.finishDate, today));
   const canPublishDuty = assignment.duties.includes("daily_task");

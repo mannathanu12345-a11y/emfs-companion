@@ -69,7 +69,7 @@ export function BatchAdminView({
         <CardContent className="space-y-3">
           {groups.map((group) => {
             const timeline = groupTimeline(batch, group.size, books, today);
-            const active = timeline.find((t) => t.status === "current") ?? timeline[0];
+            const active = timeline.find((t) => t.status === "current") ?? timeline[0]!;
             return (
               <button
                 key={group.id}

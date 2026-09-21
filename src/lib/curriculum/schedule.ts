@@ -100,8 +100,8 @@ export function groupTimeline(
       cursor: status === "current" ? cursor : pagesRead,
       startIndex,
       endIndex,
-      startDate: days[Math.min(startIndex, days.length - 1)],
-      finishDate: days[Math.min(endIndex, days.length - 1)],
+      startDate: days[Math.min(startIndex, days.length - 1)]!,
+      finishDate: days[Math.min(endIndex, days.length - 1)]!,
       dayInBook: elapsed > startIndex && elapsed <= endIndex + 1 ? elapsed - startIndex : null,
     };
     startIndex = endIndex + 1;

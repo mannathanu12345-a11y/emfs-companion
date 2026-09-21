@@ -222,7 +222,7 @@ export function RoadmapView({ batch, today }: { batch: Batch; today: Date }) {
             <tbody>
               {timelines.map(({ group, rows }) => {
                 const idx = rows.findIndex((r) => r.status === "current");
-                const active = idx >= 0 ? rows[idx] : rows[rows.length - 1];
+                const active = (idx >= 0 ? rows[idx] : rows[rows.length - 1])!;
                 const next = rows[(idx >= 0 ? idx : rows.length - 1) + 1];
                 const admins = paceAdmins.filter((a) =>
                   a.assignments.some((x) => x.groupId === group.id),
