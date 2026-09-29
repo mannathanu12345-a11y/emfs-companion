@@ -11,7 +11,7 @@ const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const DUTIES = Object.keys(DUTY_LABELS) as Duty[];
 
 type Brk = { id: string; label: string; start: string; days: number; scope: string };
-type Adm = { id: string; name: string; groupId: string; duties: Duty[]; bookId?: string };
+type Adm = { id: string; name: string; groupId: string; duties: Duty[]; bookId?: string | undefined };
 
 function Section({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
