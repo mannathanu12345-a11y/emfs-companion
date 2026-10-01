@@ -72,6 +72,7 @@ export const paceAdmins: PaceAdmin[] = [
       { groupId: "g-b4-10", duties: ["daily_task", "reflection", "inspiration", "attendance"] },
       { groupId: "g-b4-20", duties: ["daily_task", "reflection", "inspiration", "attendance"] },
       { groupId: "g-b4-40", duties: ["daily_task", "reflection", "inspiration", "attendance"] },
+      { groupId: "g-b5-10", duties: ["daily_task", "attendance"] },
     ],
   },
   {
