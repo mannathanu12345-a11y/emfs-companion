@@ -10,33 +10,108 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCatalogRouteImport } from './routes/admin.catalog'
+import { Route as AdminProfileRouteImport } from './routes/admin.profile'
+import { Route as AdminBatchesIndexRouteImport } from './routes/admin.batches.index'
+import { Route as AdminBatchesBatchIdRouteImport } from './routes/admin.batches.$batchId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCatalogRoute = AdminCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProfileRoute = AdminProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBatchesIndexRoute = AdminBatchesIndexRouteImport.update({
+  id: '/batches/',
+  path: '/batches/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBatchesBatchIdRoute = AdminBatchesBatchIdRouteImport.update({
+  id: '/batches/$batchId',
+  path: '/batches/$batchId',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/batches/$batchId': typeof AdminBatchesBatchIdRoute
+  '/admin/batches/': typeof AdminBatchesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/batches/$batchId': typeof AdminBatchesBatchIdRoute
+  '/admin/batches': typeof AdminBatchesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/batches/$batchId': typeof AdminBatchesBatchIdRoute
+  '/admin/batches/': typeof AdminBatchesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/admin/catalog'
+    | '/admin/profile'
+    | '/admin/'
+    | '/admin/batches/$batchId'
+    | '/admin/batches/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin/catalog'
+    | '/admin/profile'
+    | '/admin'
+    | '/admin/batches/$batchId'
+    | '/admin/batches'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/admin/catalog'
+    | '/admin/profile'
+    | '/admin/'
+    | '/admin/batches/$batchId'
+    | '/admin/batches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +123,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/catalog': {
+      id: '/admin/catalog'
+      path: '/catalog'
+      fullPath: '/admin/catalog'
+      preLoaderRoute: typeof AdminCatalogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/profile': {
+      id: '/admin/profile'
+      path: '/profile'
+      fullPath: '/admin/profile'
+      preLoaderRoute: typeof AdminProfileRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/batches/': {
+      id: '/admin/batches/'
+      path: '/batches'
+      fullPath: '/admin/batches/'
+      preLoaderRoute: typeof AdminBatchesIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/batches/$batchId': {
+      id: '/admin/batches/$batchId'
+      path: '/batches/$batchId'
+      fullPath: '/admin/batches/$batchId'
+      preLoaderRoute: typeof AdminBatchesBatchIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminCatalogRoute: typeof AdminCatalogRoute
+  AdminProfileRoute: typeof AdminProfileRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminBatchesBatchIdRoute: typeof AdminBatchesBatchIdRoute
+  AdminBatchesIndexRoute: typeof AdminBatchesIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCatalogRoute: AdminCatalogRoute,
+  AdminProfileRoute: AdminProfileRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminBatchesBatchIdRoute: AdminBatchesBatchIdRoute,
+  AdminBatchesIndexRoute: AdminBatchesIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
